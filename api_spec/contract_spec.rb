@@ -6,6 +6,9 @@ require 'tester/definition/endpoint'
 require 'tester/definition/fields/field'
 require 'tester/api_tester'
 require 'tester/modules/format'
+require 'tester/modules/good_case'
+require 'tester/modules/typo'
+require 'tester/modules/unused_fields'
 
 include Rack::Test::Methods
 
@@ -19,7 +22,7 @@ describe 'Contract' do
         endpoint = Endpoint.new "Sheets"
         endpoint.add_method get_sheets
 
-        tester = ApiTester.new(endpoint).with_module(Format.new)
+        tester = ApiTester.new(endpoint).with_module(Format.new).with_module(GoodCase.new).with_module(Typo.new).with_module(UnusedFields.new)
         expect(tester.go).to be true
     end
 end
