@@ -1,14 +1,7 @@
-# janky-api
-[![Build Status](https://travis-ci.org/araneforseti/janky-api.svg?branch=master)](https://travis-ci.org/araneforseti/janky-api)
+# Example API Tester
+[![Build Status](https://travis-ci.org/araneforseti/example_api-tester.svg?branch=master)](https://travis-ci.org/araneforseti/example_api-tester)
 
-API with problems useful for practicing QA or testing QA tools against. This uses a redis server as a data backend.
+Example usage of api-tester (https://github.com/araneforseti/api-tester) using Janky-API (https://github.com/araneforseti/janky-api) as a base
 
-For ease of running and managing dependencies, we use docker
-
-To run: /scripts/docker/start_docker.sh
-
-See documentation: http://localhost:4567/api-docs
-
-Requirements the API is attempting to fulfill: http://localhost:4567/specifications
-
-If you are curious, the problems present in the API, docs, and requirement are recorded in the problems file
+To run, use:
+./scripts/scripts/docker/start_docker.sh
