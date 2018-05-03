@@ -6,3 +6,4 @@ services:
 script:
   - ./scripts/docker/start_docker.sh
   - bundle exec rake specs
+  - bundle exec rake api
