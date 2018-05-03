@@ -6,8 +6,8 @@ services:
 jobs:
   include:
     - stage: deploy
-    - script: ./scripts/docker/start_docker.sh
+      script: ./scripts/docker/start_docker.sh
     - stage: test
-    - script: bundle exec rake specs
+      script: bundle exec rake specs
     - stage: api-tester output
-    - script: bundle exec rake api
+      script: bundle exec rake api
