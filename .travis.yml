@@ -3,7 +3,9 @@ sudo: required
 services:
   - docker
 
-script:
-  - ./scripts/docker/start_docker.sh
-  - bundle exec rake specs
-  - bundle exec rake api
+jobs:
+  include:
+    - stage: deploy
+      script: ./scripts/docker/start_docker.sh && bundle exec rake specs
+    - stage: api-tester output
+      script: ./scripts/docker/start_docker.sh && bundle exec rake api
