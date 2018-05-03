@@ -57,7 +57,8 @@ describe 'Contract' do
 
             tester = ApiTester.new(endpoint).with_module(Format.new).with_module(GoodCase.new).with_module(Typo.new).with_module(UnusedFields.new)
             tester.test_helper = SheetCreator.new base_url
-            expect(tester.go).to be true
+            # Janky-API is built to fail
+            expect(tester.go).to be false
         end
     end
 
@@ -81,7 +82,8 @@ describe 'Contract' do
 
             tester = ApiTester.new(endpoint).with_module(Format.new).with_module(GoodCase.new).with_module(Typo.new).with_module(UnusedFields.new)
             tester.test_helper = SheetCreator.new base_url
-            expect(tester.go).to be true
+            # Janky-API is built to fail
+            expect(tester.go).to be false
         end
     end
 end
