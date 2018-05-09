@@ -8,5 +8,5 @@ gem 'redis'
 
 group :test, :development do
   gem 'rspec'
-  gem 'api-tester', :git => 'https://github.com/araneforseti/api-tester'
+  gem 'api-tester', '0.0.3'
 end

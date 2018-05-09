@@ -21,7 +21,7 @@ describe 'Contract' do
 
     context 'Sheets' do
         it 'match contract' do
-            get_sheets = ApiGet.new "http://localhost:4567/api/v1/sheets"
+            get_sheets = ApiGet.new
             get_sheets.request = Request.new
             get_sheets.expected_response = Response.new(200).add_field(ObjectField.new("sheets")
                 .with_field(Field.new "id")
@@ -33,7 +33,7 @@ describe 'Contract' do
                 .with_field(NumberField.new "intelligence")
                 .with_field(NumberField.new "charisma"))
     
-            post_sheets = ApiPost.new "http://localhost:4567/api/v1/sheets"
+            post_sheets = ApiPost.new
             post_sheets.request = Request.new.add_field(Field.new "id")
                 .add_field(Field.new "name")
                 .add_field(NumberField.new "strength")
@@ -51,7 +51,7 @@ describe 'Contract' do
                 .add_field(NumberField.new "intelligence")
                 .add_field(NumberField.new "charisma")
 
-            endpoint = Endpoint.new "Sheets"
+            endpoint = Endpoint.new "Sheets", "#{base_url}/sheets"
             endpoint.add_method get_sheets
             endpoint.add_method post_sheets
 
@@ -64,7 +64,7 @@ describe 'Contract' do
 
     context 'Sheet' do
         it 'follows contract' do
-            get_sheets = ApiGet.new "#{base_url}/sheets/testSheet"
+            get_sheets = ApiGet.new 
             get_sheets.request = Request.new
             sheet_field = ObjectField.new("sheet").with_field(Field.new "id", "testSheet")
                 .with_field(Field.new "name")
@@ -77,7 +77,7 @@ describe 'Contract' do
                 .with_field(ArrayField.new "skills")
             get_sheets.expected_response = Response.new(200).add_field(sheet_field)
 
-            endpoint = Endpoint.new "Sheets"
+            endpoint = Endpoint.new "Sheets", "#{base_url}/sheets/testSheet"
             endpoint.add_method get_sheets
 
             tester = ApiTester.new(endpoint).with_module(Format.new).with_module(GoodCase.new).with_module(Typo.new).with_module(UnusedFields.new)
