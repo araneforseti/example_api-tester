@@ -54,9 +54,9 @@ describe 'Contract' do
             endpoint = Endpoint.new "Sheets", "#{base_url}/sheets"
             endpoint.add_method get_sheets
             endpoint.add_method post_sheets
+            endpoint.test_helper = SheetCreator.new base_url
 
             tester = ApiTester.new(endpoint).with_module(Format.new).with_module(GoodCase.new).with_module(Typo.new).with_module(UnusedFields.new)
-            tester.test_helper = SheetCreator.new base_url
             # Janky-API is built to fail
             expect(tester.go).to be false
         end
@@ -79,9 +79,9 @@ describe 'Contract' do
 
             endpoint = Endpoint.new "Sheets", "#{base_url}/sheets/testSheet"
             endpoint.add_method get_sheets
+            endpoint.test_helper = SheetCreator.new base_url
 
             tester = ApiTester.new(endpoint).with_module(Format.new).with_module(GoodCase.new).with_module(Typo.new).with_module(UnusedFields.new)
-            tester.test_helper = SheetCreator.new base_url
             # Janky-API is built to fail
             expect(tester.go).to be false
         end

@@ -8,5 +8,5 @@ gem 'redis'
 
 group :test, :development do
   gem 'rspec'
-  gem 'api-tester', '0.0.3'
+  gem 'api-tester', '0.0.4'
 end
