@@ -15,6 +15,7 @@ require 'api-tester/modules/format'
 require 'api-tester/modules/good_case'
 require 'api-tester/modules/typo'
 require 'api-tester/modules/unused_fields'
+require 'api-tester/modules/extra_verbs'
 
 include Rack::Test::Methods
 
@@ -63,10 +64,11 @@ describe 'Contract' do
     sheet_endpoint.add_method ApiTester::SupportedVerbs::POST, expected_response, post_request
 
     config = ApiTester::Config.new
-      .with_module(ApiTester::Format.new)
-      .with_module(ApiTester::GoodCase.new)
-      .with_module(ApiTester::Typo.new)
-      .with_module(ApiTester::UnusedFields.new)
+      .with_module(ApiTester::Format)
+      .with_module(ApiTester::ExtraVerbs)
+      .with_module(ApiTester::GoodCase)
+      .with_module(ApiTester::Typo)
+      .with_module(ApiTester::UnusedFields)
     expect(ApiTester.go(contract, config)).to be false
   end
 end
