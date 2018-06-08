@@ -4,7 +4,7 @@ require 'api-tester'
 require 'api-tester/test_helper'
 require 'api-tester/definition/endpoint'
 require 'api-tester/config'
-require 'api-tester/definition/api_contract'
+require 'api-tester/definition/contract'
 require 'api-tester/definition/request'
 require 'api-tester/definition/response'
 require 'api-tester/definition/fields/field'
@@ -23,25 +23,25 @@ describe 'Contract' do
   let(:base_url) { "http://localhost:4567/api/v1" }
 
   it 'match contract' do
-    contract = ApiTester::ApiContract.new "Janky API"
+    contract = ApiTester::Contract.new "Janky API"
 
     sheets_endpoint = ApiTester::Endpoint.new "Sheets", "#{base_url}/sheets"
-    post_request = ApiTester::Request.new.add_field(ApiTester::Field.new "id")
-        .add_field(ApiTester::Field.new "name")
-        .add_field(ApiTester::NumberField.new "strength")
-        .add_field(ApiTester::NumberField.new "dexterity")
-        .add_field(ApiTester::NumberField.new "constitution")
-        .add_field(ApiTester::NumberField.new "will")
-        .add_field(ApiTester::NumberField.new "intelligence")
-        .add_field(ApiTester::NumberField.new "charisma")
+    post_request = ApiTester::Request.new.add_field(ApiTester::Field.new name: "id")
+        .add_field(ApiTester::Field.new name: "name")
+        .add_field(ApiTester::NumberField.new name: "strength")
+        .add_field(ApiTester::NumberField.new name: "dexterity")
+        .add_field(ApiTester::NumberField.new name: "constitution")
+        .add_field(ApiTester::NumberField.new name: "will")
+        .add_field(ApiTester::NumberField.new name: "intelligence")
+        .add_field(ApiTester::NumberField.new name: "charisma")
     expected_response = ApiTester::Response.new(200)
-        .add_field(ApiTester::Field.new "name")
-        .add_field(ApiTester::NumberField.new "strength")
-        .add_field(ApiTester::NumberField.new "dexterity")
-        .add_field(ApiTester::NumberField.new "constitution")
-        .add_field(ApiTester::NumberField.new "will")
-        .add_field(ApiTester::NumberField.new "intelligence")
-        .add_field(ApiTester::NumberField.new "charisma")
+        .add_field(ApiTester::Field.new name: "name")
+        .add_field(ApiTester::NumberField.new name: "strength")
+        .add_field(ApiTester::NumberField.new name: "dexterity")
+        .add_field(ApiTester::NumberField.new name: "constitution")
+        .add_field(ApiTester::NumberField.new name: "will")
+        .add_field(ApiTester::NumberField.new name: "intelligence")
+        .add_field(ApiTester::NumberField.new name: "charisma")
     sheets_endpoint.add_method :get, expected_response
     sheets_endpoint.add_method :post, expected_response, post_request
     sheets_endpoint.test_helper = SheetCreator.new base_url
@@ -50,15 +50,15 @@ describe 'Contract' do
     sheet_endpoint = ApiTester::Endpoint.new "Sheets", "#{base_url}/sheets/{testSheet}"
     sheet_endpoint.add_path_param "testSheet"
     sheet_endpoint.test_helper = SheetCreator.new base_url
-    sheet_field = ApiTester::ObjectField.new("sheet").with_field(ApiTester::Field.new "id", "testSheet")
-        .with_field(ApiTester::Field.new "name")
-        .with_field(ApiTester::NumberField.new "strength")
-        .with_field(ApiTester::NumberField.new "dexterity")
-        .with_field(ApiTester::NumberField.new "constitution")
-        .with_field(ApiTester::NumberField.new "will")
-        .with_field(ApiTester::NumberField.new "intelligence")
-        .with_field(ApiTester::NumberField.new "charisma")
-        .with_field(ApiTester::ArrayField.new "skills")
+    sheet_field = ApiTester::ObjectField.new(name: "sheet").with_field(ApiTester::Field.new name: "id", default_value: "testSheet")
+        .with_field(ApiTester::Field.new name: "name")
+        .with_field(ApiTester::NumberField.new name: "strength")
+        .with_field(ApiTester::NumberField.new name: "dexterity")
+        .with_field(ApiTester::NumberField.new name: "constitution")
+        .with_field(ApiTester::NumberField.new name: "will")
+        .with_field(ApiTester::NumberField.new name: "intelligence")
+        .with_field(ApiTester::NumberField.new name: "charisma")
+        .with_field(ApiTester::ArrayField.new name: "skills")
     expected_response = ApiTester::Response.new(200).add_field(sheet_field)
     sheet_endpoint.add_method ApiTester::SupportedVerbs::GET, expected_response
     sheet_endpoint.add_method ApiTester::SupportedVerbs::POST, expected_response, post_request
