@@ -11,9 +11,7 @@ on: [push]
     
 jobs:
   test:
-
     runs-on: ubuntu-latest
-
     steps:  
     - uses: actions/checkout@v2
     - name: Set up Ruby
@@ -24,6 +22,10 @@ jobs:
       uses: supercharge/redis-github-action@1.2.0
     - name: Run tests
       run: bundle exec rake specs
+  
+  example:
+    runs-on: ubuntu-latest
+    steps:
     - name: Start server
       run: ./scripts/docker/start_docker.sh
     - name: Run api tester
