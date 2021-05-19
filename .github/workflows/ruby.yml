@@ -26,6 +26,11 @@ jobs:
   example:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - name: Start server
       run: ./scripts/docker/start_docker.sh
     - name: Run api tester
