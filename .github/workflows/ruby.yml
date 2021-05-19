@@ -24,5 +24,7 @@ jobs:
       uses: supercharge/redis-github-action@1.2.0
     - name: Run tests
       run: bundle exec rake specs
+    - name: Start server
+      run: ./scripts/docker/start_docker.sh
     - name: Run api tester
       run: bundle exec rake api
