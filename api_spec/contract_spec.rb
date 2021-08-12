@@ -23,7 +23,7 @@ describe 'Contract' do
   let(:base_url) { "http://localhost:4567/api/v1" }
 
   it 'match contract' do
-    contract = ApiTester::Contract.new "Janky API"
+    contract = ApiTester::Contract.new name: "Janky API", base_url: base_url
 
     sheets_endpoint = ApiTester::Endpoint.new "Sheets", "#{base_url}/sheets"
     post_request = ApiTester::Request.new.add_field(ApiTester::Field.new name: "id")
